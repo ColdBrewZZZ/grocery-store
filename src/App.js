@@ -8,7 +8,7 @@ function App() {
   const [cartItems, setCartItems] = useState([]);
   const [groceryItems, setGroceryItems] = useState([
     { id: 1, name: 'apple', price: '3', quantity: 10, image: apple },
-    { id: 2, name: 'bread', price: '5.99', quantity: 3, image: bread }
+    { id: 2, name: 'bread', price: '5.99', quantity: 3, image: bread },
   ]);
 
   const addToCart = (name, price) => {
@@ -40,9 +40,9 @@ function App() {
 
   const checkIfItemAlreadyInCart = (name, price, quantity) => {
     const existingItem = cartItems.find(item => item.selectedGrocery === name);
+    decrementGroceryItem(name);
     if (existingItem) {
       incrementCartItem(name);
-      decrementGroceryItem(name);
     } else {
       addToCart(name, price);
     }

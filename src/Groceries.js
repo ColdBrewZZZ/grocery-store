@@ -1,8 +1,10 @@
 import React from 'react';
 
 function Groceries(props) {
-    const checkIfItemAlreadyInCartHandler = (selectedGrocery,price) => {
-        props.functionProp(selectedGrocery,price);
+    const checkIfItemAlreadyInCartHandler = (selectedGrocery,price,quantity) => {
+        if (quantity > 0) {
+            props.functionProp(selectedGrocery,price);
+        }
       }
 
   return (
