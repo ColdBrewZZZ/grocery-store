@@ -6,6 +6,10 @@ import bread from './img/bread1.JPG';
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
+  const [groceryItems, setGroceryItems] = useState([
+    { id: 1, name: 'apple', price: '3', quantity: 10, image: apple },
+    { id: 2, name: 'bread', price: '5.99', quantity: 3, image: bread }
+  ]);
 
   const addToCart = (name, price) => {
     const item = {
@@ -23,12 +27,22 @@ function App() {
         : item
     );
     setCartItems(updatedItems);
-  }
+  };
 
-  const checkIfItemAlreadyInCart = (name, price) => {
+  const decrementGroceryItem = (name) => {
+    const updatedItems = groceryItems.map(item =>
+      item.name === name
+        ? { ...item, quantity: item.quantity - 1 }
+        : item
+    );
+    setGroceryItems(updatedItems);
+  };
+
+  const checkIfItemAlreadyInCart = (name, price, quantity) => {
     const existingItem = cartItems.find(item => item.selectedGrocery === name);
     if (existingItem) {
       incrementCartItem(name);
+      decrementGroceryItem(name);
     } else {
       addToCart(name, price);
     }
@@ -38,20 +52,16 @@ function App() {
     <div>
       <div className="row">
         <div className="col-3">
-        {[
-            [apple, 'apple', '3', '10'],
-            [bread, 'bread', '5.99', '4']
-          ].map(item => (
+          {groceryItems.map(item => (
             <Groceries
-              key={item[1]} // Use a unique key for each mapped element
-              image={item[0]}
-              name={item[1]}
-              price={item[2]}
-              quantity={item[3]}
+              key={item.id}
+              image={item.image}
+              name={item.name}
+              price={item.price}
+              quantity={item.quantity}
               functionProp={checkIfItemAlreadyInCart}
             />
           ))}
-          
         </div>
         <div className="col-3">
           <ul id="shoppingCart">

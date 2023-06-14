@@ -9,7 +9,7 @@ function Groceries(props) {
     <div>
       <div className="container">
         <div className="text-center">
-            <div class="container border" onClick={() => checkIfItemAlreadyInCartHandler(props.name,props.price)}>
+            <div class="container border" onClick={() => checkIfItemAlreadyInCartHandler(props.name,props.price,props.quantity)}>
                 <img src={props.image}/>
                 <p>{props.name}</p>
                 <p>${props.price}</p>
