@@ -51,7 +51,7 @@ function App() {
   return (
     <div>
       <div className="row">
-        <div className="col-3">
+        <div className="col-5">
           {groceryItems.map(item => (
             <Groceries
               key={item.id}
@@ -63,7 +63,7 @@ function App() {
             />
           ))}
         </div>
-        <div className="col-3">
+        <div className="col-6">
           <ul id="shoppingCart">
             {cartItems.map((item, index) => (
               <li key={index}>
