@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import Groceries from './Groceries';
 import ShoppingCart from './ShoppingCart';
-import apple from './img/apple.jpeg';
+import apple from './img/apple2.JPG';
+import bread from './img/bread1.JPG';
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -15,15 +16,19 @@ function App() {
     setCartItems([...cartItems, item]);
   };
 
+  const incrementCartItem = (name) => {
+    const updatedItems = cartItems.map(item =>
+      item.selectedGrocery === name
+        ? { ...item, quantityInCart: item.quantityInCart + 1 }
+        : item
+    );
+    setCartItems(updatedItems);
+  }
+
   const checkIfItemAlreadyInCart = (name, price) => {
     const existingItem = cartItems.find(item => item.selectedGrocery === name);
     if (existingItem) {
-      const updatedItems = cartItems.map(item =>
-        item.selectedGrocery === name
-          ? { ...item, quantityInCart: item.quantityInCart + 1 }
-          : item
-      );
-      setCartItems(updatedItems);
+      incrementCartItem(name);
     } else {
       addToCart(name, price);
     }
@@ -33,13 +38,20 @@ function App() {
     <div>
       <div className="row">
         <div className="col-3">
-          <Groceries
-            image={apple}
-            name="apple"
-            price="3"
-            quantity="10"
-            functionProp={checkIfItemAlreadyInCart}
-          />
+        {[
+            [apple, 'apple', '3', '10'],
+            [bread, 'bread', '5.99', '4']
+          ].map(item => (
+            <Groceries
+              key={item[1]} // Use a unique key for each mapped element
+              image={item[0]}
+              name={item[1]}
+              price={item[2]}
+              quantity={item[3]}
+              functionProp={checkIfItemAlreadyInCart}
+            />
+          ))}
+          
         </div>
         <div className="col-3">
           <ul id="shoppingCart">
