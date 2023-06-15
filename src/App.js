@@ -100,7 +100,7 @@ function App() {
 
   const calculateTotalCost = () => {
     const totalCost = cartItems.reduce((total, item) => total + (item.quantityInCart * item.selectedGroceryPrice), 0);
-    return totalCost;
+    return totalCost.toFixed(2);
   };
 
   const orderButtonClicked = () => {
