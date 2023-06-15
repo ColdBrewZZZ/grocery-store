@@ -98,7 +98,10 @@ function App() {
   };
 
   return (
-    <div>
+    <div class="bg-light"> 
+       <header class=" conatiaoner-fluid col-12 bg-info text-white" >
+          <h2 class="p-2">Grocery Store</h2>
+        </header>
       {showReceipt ? (
         <div class="container">
           <h3>Receipt:</h3>
@@ -150,6 +153,36 @@ function App() {
           </div>
         </div>
       )}
+      <footer class="bg-info text-lg-start">
+
+        <div class="container p-4">
+  
+          <div class="row">
+      
+      <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+        <h5 class="text-uppercase text-white">Grocery Store</h5>
+
+        <p>
+        With an array of high-quality products and a commitment to excellence, 
+        we take pride in offering the finest selection of food items. 
+        Our items include apple, bread, and more! 
+        We prioritize the highest standards of quality to ensure that our customers receive nothing but the best! 
+        </p>
+      </div>
+    
+
+     
+     
+     
+    </div>
+ 
+  </div>
+ 
+
+
+ 
+ 
+</footer>
     </div>
   );
   
