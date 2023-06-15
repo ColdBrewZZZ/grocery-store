@@ -6,14 +6,14 @@ import OrderButton from './OrderButton';
 import Receipt from './Receipt';
 import apple from './img/apple2.JPG';
 import bread from './img/bread1.JPG';
-import OrderButton from './OrderButton';
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
   const [groceryItems, setGroceryItems] = useState([
-    { id: 1, name: 'apple', price: 3.25, quantity: 10, image: apple },
-    { id: 2, name: 'bread', price: 5.99, quantity: 3, image: bread },
+    { name: 'apple', price: 3.25, quantity: 10, image: apple },
+    { name: 'bread', price: 5.99, quantity: 3, image: bread },
   ]);
+  const[showReceipt, setShowReceipt] = useState(false);
 
   const addToCart = (name, price) => {
     const item = {
@@ -93,45 +93,66 @@ function App() {
     return totalCost;
   };
 
+  const orderButtonClicked = () => {
+    setShowReceipt(true);
+  };
+
   return (
     <div>
-      <div className="row">
-        <div className="col-5">
-          {groceryItems.map(item => (
-            <Groceries
-              key={item.id}
-              image={item.image}
-              name={item.name}
-              price={item.price}
-              quantity={item.quantity}
-              functionProp={checkIfItemAlreadyInCart}
-            />
-          ))}
+      {showReceipt ? (
+        <div class="container">
+          <h3>Receipt:</h3>
+          <ul>
+            {cartItems.map((item) => (
+              <Receipt
+                key={item.selectedGrocery}
+                name={item.selectedGrocery}
+                price={item.selectedGroceryPrice}
+                quantity={item.quantityInCart}
+              />
+            ))}
+          </ul>
+          <p>Thank you!</p>
         </div>
-        <div className="col-6">
-          <div>
+      ) : (
+        <div class="row">
+          <div class="col-5">
+            {groceryItems.map((item) => (
+              <Groceries
+                image={item.image}
+                name={item.name}
+                price={item.price}
+                quantity={item.quantity}
+                functionProp={checkIfItemAlreadyInCart}
+              />
+            ))}
+          </div>
+          <div class="col-6">
+            <ul id="shoppingCart">
+              {cartItems.map((item) => (
+                <li>
+                  <ShoppingCart
+                    selectedGrocery={item.selectedGrocery}
+                    totalPrice={item.selectedGroceryPrice * item.quantityInCart}
+                    quantityInCart={item.quantityInCart}
+                    functionProp={cartItemClicked}
+                  />
+                </li>
+              ))}
+            </ul>
             <Total
               numberOfItems={calculateTotalQuantityInCart()}
               totalPrice={calculateTotalCost()}
             />
+            <OrderButton
+              functionProp={orderButtonClicked}
+            />
           </div>
-          <ul id="shoppingCart">
-            {cartItems.map((item, index) => (
-              <li key={index}>
-                <ShoppingCart
-                  selectedGrocery={item.selectedGrocery}
-                  totalPrice={item.selectedGroceryPrice * item.quantityInCart}
-                  quantityInCart={item.quantityInCart}
-                  functionProp={cartItemClicked}
-                />
-              </li>
-            ))}
-          </ul>
-          <OrderButton/>
         </div>
-      </div>
+      )}
     </div>
   );
+  
 }
 
 export default App;
