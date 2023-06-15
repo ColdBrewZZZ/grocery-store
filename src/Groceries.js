@@ -13,7 +13,7 @@ function Groceries(props) {
     <div>
       <div className="container">
         <div className="text-center">
-          <div class={`container border border-dark ${backgroundColor}`}
+          <div class={`container border border-dark rounded ${backgroundColor}`}
                 onClick={() => checkIfItemAlreadyInCartHandler(
                 props.name,
                 props.price,
@@ -21,7 +21,7 @@ function Groceries(props) {
                 )
                 }
           >
-            <img className="border mt-2 border-dark" src={props.image} />
+            <img class="border mt-2 border-dark rounded" src={props.image} />
             <p>{props.name}</p>
             <p>${props.price}</p>
             <p> left in stock: <span>{props.quantity}</span></p>

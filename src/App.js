@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import Groceries from './Groceries';
 import ShoppingCart from './ShoppingCart';
+import Total from './Total';
+import OrderButton from './OrderButton';
+import Receipt from './Receipt';
 import apple from './img/apple2.JPG';
 import bread from './img/bread1.JPG';
+import OrderButton from './OrderButton';
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -79,6 +83,16 @@ function App() {
     removeEmptyItemsFromCart();
   };
 
+  const calculateTotalQuantityInCart = () => {
+    const totalQuantityInCart = cartItems.reduce((total, item) => total + item.quantityInCart, 0);
+    return totalQuantityInCart;
+  };
+
+  const calculateTotalCost = () => {
+    const totalCost = cartItems.reduce((total, item) => total + (item.quantityInCart * item.selectedGroceryPrice), 0);
+    return totalCost;
+  };
+
   return (
     <div>
       <div className="row">
@@ -95,6 +109,12 @@ function App() {
           ))}
         </div>
         <div className="col-6">
+          <div>
+            <Total
+              numberOfItems={calculateTotalQuantityInCart()}
+              totalPrice={calculateTotalCost()}
+            />
+          </div>
           <ul id="shoppingCart">
             {cartItems.map((item, index) => (
               <li key={index}>
@@ -107,6 +127,7 @@ function App() {
               </li>
             ))}
           </ul>
+          <OrderButton/>
         </div>
       </div>
     </div>
