@@ -18,8 +18,8 @@ function Groceries(props) {
                 props.name,
                 props.price,
                 props.quantity
-              )
-            }
+                )
+                }
           >
             <img className="border mt-2 border-dark" src={props.image} />
             <p>{props.name}</p>

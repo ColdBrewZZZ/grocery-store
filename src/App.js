@@ -7,8 +7,8 @@ import bread from './img/bread1.JPG';
 function App() {
   const [cartItems, setCartItems] = useState([]);
   const [groceryItems, setGroceryItems] = useState([
-    { id: 1, name: 'apple', price: '3', quantity: 10, image: apple },
-    { id: 2, name: 'bread', price: '5.99', quantity: 3, image: bread },
+    { id: 1, name: 'apple', price: 3.25, quantity: 10, image: apple },
+    { id: 2, name: 'bread', price: 5.99, quantity: 3, image: bread },
   ]);
 
   const addToCart = (name, price) => {
@@ -20,10 +20,14 @@ function App() {
     setCartItems([...cartItems, item]);
   };
 
-  const incrementCartItem = (name) => {
+  const incrementCartItem = (name, price) => {
     const updatedItems = cartItems.map(item =>
       item.selectedGrocery === name
-        ? { ...item, quantityInCart: item.quantityInCart + 1 }
+        ? { 
+          ...item, 
+          quantityInCart: item.quantityInCart + 1,
+          
+         }
         : item
     );
     setCartItems(updatedItems);
@@ -38,14 +42,41 @@ function App() {
     setGroceryItems(updatedItems);
   };
 
-  const checkIfItemAlreadyInCart = (name, price, quantity) => {
+  const checkIfItemAlreadyInCart = (name, price) => {
     const existingItem = cartItems.find(item => item.selectedGrocery === name);
     decrementGroceryItem(name);
     if (existingItem) {
-      incrementCartItem(name);
+      incrementCartItem(name, price);
     } else {
       addToCart(name, price);
     }
+  };
+
+  const removeEmptyItemsFromCart = () => {
+    setCartItems(current => current.filter(item => item.quantityInCart > 0));
+  };
+
+  const incrementGroceryItem = (name) => {
+    const updatedItems = groceryItems.map(item =>
+      item.name === name
+        ? { ...item, quantity: item.quantity + 1 }
+        : item
+    );
+    setGroceryItems(updatedItems);
+  };
+
+  const cartItemClicked = (name, quantity) => {
+    const updatedItems = cartItems.map(item =>
+      item.selectedGrocery === name
+        ? {
+            ...item,
+            quantityInCart: item.quantityInCart - 1, 
+          }
+        : item
+    );
+    setCartItems(updatedItems);
+    incrementGroceryItem(name);
+    removeEmptyItemsFromCart();
   };
 
   return (
@@ -69,8 +100,9 @@ function App() {
               <li key={index}>
                 <ShoppingCart
                   selectedGrocery={item.selectedGrocery}
-                  selectedGroceryPrice={item.selectedGroceryPrice}
+                  totalPrice={item.selectedGroceryPrice * item.quantityInCart}
                   quantityInCart={item.quantityInCart}
+                  functionProp={cartItemClicked}
                 />
               </li>
             ))}
