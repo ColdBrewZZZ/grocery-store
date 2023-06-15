@@ -7,7 +7,7 @@ function Groceries(props) {
     }
   };
 
-  const backgroundColor = props.quantity === 0 ? 'bg-danger' : 'bg-success';
+  const backgroundColor = props.quantity === 0 ? 'bg-danger' : 'bg-light';
 
   return (
     <div>

@@ -2,10 +2,8 @@ import React from 'react';
 
 function Receipt(props) {
   return (
-    <li>
-        <p>{props.name}</p>
-        <p>price: {props.price} </p>
-        <p>In cart: {props.quantity}</p>
+    <li> 
+        <p>{props.name}, price: ${props.price}, amount: {props.quantity}</p>
     </li>
   );
 }

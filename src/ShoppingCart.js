@@ -6,7 +6,7 @@ function ShoppingCart(props) {
 
     return (
       <div>
-        <div className="container">
+        <div className="container ">
           <div className="text-center">
               <div class="container border "
                onClick={() => cartItemClickedHandler(
