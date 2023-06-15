@@ -6,12 +6,22 @@ import OrderButton from './OrderButton';
 import Receipt from './Receipt';
 import apple from './img/apple2.JPG';
 import bread from './img/bread1.JPG';
+import chips from './img/chips.JPG';
+import milk from './img/milk.JPG';
+import pickles from './img/pickles.JPG';
+import yogurt from './img/yogurt.JPG';
+import coffee from './img/coffee.JPG';
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
   const [groceryItems, setGroceryItems] = useState([
     { name: 'apple', price: 3.25, quantity: 10, image: apple },
     { name: 'bread', price: 5.99, quantity: 3, image: bread },
+    { name: 'chips', price: 4.79, quantity: 6, image: chips },
+    { name: 'milk', price: 6.29, quantity: 4, image: milk },
+    { name: 'pickles', price: 2.49, quantity: 9, image: pickles },
+    { name: 'yogurt', price: 1.39, quantity: 3, image: yogurt },
+    { name: 'coffee', price: 21.78, quantity: 100, image: coffee },
   ]);
   const[showReceipt, setShowReceipt] = useState(false);
 
@@ -98,7 +108,10 @@ function App() {
   };
 
   return (
-    <div>
+    <div class="bg-light"> 
+       <header class=" conatiaoner-fluid col-12 bg-info text-white" >
+          <h2 class="p-2">Grocery Store</h2>
+        </header>
       {showReceipt ? (
         <div class="container">
           <h3>Receipt:</h3>
@@ -112,6 +125,8 @@ function App() {
               />
             ))}
           </ul>
+          <p>you have purchased {calculateTotalQuantityInCart()} items</p>
+            <p>total cost: ${calculateTotalCost()}</p>
           <p>Thank you!</p>
         </div>
       ) : (
@@ -128,7 +143,7 @@ function App() {
             ))}
           </div>
           <div class="col-6">
-            <ul id="shoppingCart">
+            <ul id="shoppingCart" class="list-unstyled ">
               {cartItems.map((item) => (
                 <li>
                   <ShoppingCart
@@ -150,6 +165,36 @@ function App() {
           </div>
         </div>
       )}
+      <footer class="bg-info text-lg-start">
+
+        <div class="container p-4">
+  
+          <div class="row">
+      
+      <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+        <h5 class="text-uppercase text-white">Grocery Store</h5>
+
+        <p>
+        With an array of high-quality products and a commitment to excellence, 
+        we take pride in offering the finest selection of food items. 
+        Our items include apple, bread, and more! 
+        We prioritize the highest standards of quality to ensure that our customers receive nothing but the best! 
+        </p>
+      </div>
+    
+
+     
+     
+     
+    </div>
+ 
+  </div>
+ 
+
+
+ 
+ 
+</footer>
     </div>
   );
   
