@@ -117,7 +117,7 @@ function App() {
 
     return (
       <div>
-        <h2>Grocery Store</h2>
+        <h2>Lillybee's</h2>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <ul className="navbar-nav mr-auto">
             <li><Link to={'/'} className="nav-link"> Home </Link></li>
@@ -141,7 +141,11 @@ function App() {
           calculateTotalCost={calculateTotalCost}
           orderButtonClicked={orderButtonClicked}
           />} />
-          <Route path="/Order" element={<Order cartItems={cartItems} />} /> 
+          <Route path="/Order" element={<Order 
+          cartItems={cartItems} 
+          calculateTotalQuantityInCart={calculateTotalQuantityInCart}
+          calculateTotalCost={calculateTotalCost}
+          />} /> 
           <Route path="/History" element={<History />} />
         </Routes>
       </div>

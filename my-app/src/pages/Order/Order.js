@@ -6,6 +6,16 @@ function Order(props) {
   
   const cartItems = props.cartItems ? props.cartItems : [];
 
+  const calculateTotalQuantityInCartHandler = () => {
+    const totalQuantityInCart = props.calculateTotalQuantityInCart();
+    return totalQuantityInCart;
+  };
+
+  const calculateTotalCostHandler = () => {
+    const totalCost = props.calculateTotalCost();
+    return totalCost;
+  };
+
   return (
     <div className="container">
       <h3>Receipt:</h3>
@@ -18,8 +28,8 @@ function Order(props) {
           />
         ))}
       </ul>
-      <p>you have purchased {cartItems.length} items</p>
-      <p>total cost: ${'2'}</p>
+      <p>you have purchased {calculateTotalQuantityInCartHandler()} items</p>
+      <p>total cost: ${calculateTotalCostHandler()}</p>
       <p>Thank you!</p>
     </div>
   );
