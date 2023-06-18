@@ -4,8 +4,8 @@ function Total(props) {
   return (
     <div>
       <div className="container bg-info border border-dark text-center rounded">
-      <p className="p-2">you have <span>{props.numberOfItems} items in your cart</span></p>
-        <p className="p-2">total: $<span>{props.totalPrice}</span></p>
+      <p className="p-2">Subtotal (<span>{props.numberOfItems}</span> items): <span class="font-weight-bold">${props.totalPrice}</span></p>
+
       </div>
     </div>
   );

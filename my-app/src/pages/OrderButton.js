@@ -9,7 +9,7 @@ function OrderButton(props) {
     <div>
       <div className="container">
         <div className="text-center">
-          <button className="btn col-3 mt-3 mx-5 btn-outline-dark" onClick={() => orderButtonClickedHandler()} >Order</button>
+          <button className="btn mt-3 mx-5 btn-outline-dark" onClick={() => orderButtonClickedHandler()}>Proceed to checkout</button>
         </div>
       </div>
     </div>
