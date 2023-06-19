@@ -1,10 +1,14 @@
 import { Link } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import ReceiptItem from './ReceiptItem';
 
 function Order(props) {
+
+ 
   
   const cartItems = props.cartItems ? props.cartItems : [];
+
+  
 
   const calculateTotalQuantityInCartHandler = () => {
     const totalQuantityInCart = props.calculateTotalQuantityInCart();
@@ -15,6 +19,13 @@ function Order(props) {
     const totalCost = props.calculateTotalCost();
     return totalCost;
   };
+
+  useEffect(() => {
+    const orderHistory = JSON.parse(localStorage.getItem('orderHistory')) || [];
+    const newOrder = { items: cartItems.map(item => item.selectedGrocery), total: calculateTotalCostHandler() };
+    orderHistory.push(newOrder);
+    localStorage.setItem('orderHistory', JSON.stringify(orderHistory));
+  }, [cartItems, calculateTotalCostHandler]);
 
   return (
     <div className="container">
